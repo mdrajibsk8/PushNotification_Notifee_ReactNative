@@ -97,13 +97,28 @@ function App() {
     await NotificationService.sendMultiDeviceNotification(notificationData);
   };
 
+  const subscribeToTopic = () => {
+    messaging()
+      .subscribeToTopic('weather2')
+      .then(() => console.log('Subscribed to topic!'));
+  };
+
+  const unsubscribeToTopic = () => {
+    messaging()
+      .unsubscribeFromTopic('weather2')
+      .then(() => console.log('Unsubscribed fom the topic!'));
+  };
+
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Button title="Send Notification" onPress={sendNotification} />
+      {/* <Button title="Send Notification" onPress={sendNotification} />
       <Button
         title="Send Multi Device Notification"
         onPress={sendMultiNotification}
-      />
+      /> */}
+
+      <Button title="Subscribe to Topic" onPress={subscribeToTopic} />
+      <Button title="Unsubscribe to Topic" onPress={unsubscribeToTopic} />
     </View>
   );
 }
