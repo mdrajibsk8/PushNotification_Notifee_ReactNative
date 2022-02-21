@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {View, Button, Alert} from 'react-native';
-import notifee from '@notifee/react-native';
+import notifee, {AndroidImportance} from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
 import NotificationService from './NotificationService';
 
@@ -33,6 +33,7 @@ function App() {
     const channelId = await notifee.createChannel({
       id: 'default',
       name: 'Default Channel',
+      importance: AndroidImportance.HIGH,
     });
 
     // Display a notification
@@ -41,7 +42,6 @@ function App() {
       body: remoteMessage.notification.body,
       android: {
         channelId,
-        smallIcon: 'ic_launcher', // optional, defaults to 'ic_launcher'.
       },
     });
   }
@@ -51,6 +51,7 @@ function App() {
     const channelId = await notifee.createChannel({
       id: 'default',
       name: 'Default Channel',
+      importance: AndroidImportance.HIGH,
     });
 
     // Display a notification
@@ -117,7 +118,8 @@ function App() {
         onPress={sendMultiNotification}
       /> */}
 
-      <Button title="Subscribe to Topic" onPress={subscribeToTopic} />
+      <Button title="Local Notification" onPress={localDisplayNotification} />
+      <Button title="Local Notification" onPress={subscribeToTopic} />
       <Button title="Unsubscribe to Topic" onPress={unsubscribeToTopic} />
     </View>
   );
